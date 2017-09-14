@@ -1,0 +1,5 @@
+<session id="index">
+    <h1>111</h1><h3>444</h3>
+</session>  
+<button id = "cameraTakePicture">TAKE PICTURE</button>
+<img id = "myImage"></img>

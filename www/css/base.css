@@ -1,0 +1,70 @@
+*{
+	padding:0;
+	margin: 0;
+}
+#style{
+	position: fixed;
+	height: 100%;
+	width: 100%;
+	background-color: rgba(0,0,0,.1);
+}
+.big{
+	width: 60px;
+	height: 60px;
+	position: fixed;
+	left: 50%;
+	top: 50%;	
+	animation: mymove 2s linear infinite;
+}
+@keyframes mymove{
+	from{transform:translate(-30px, -30px)  rotate(0deg) ;}
+	to{transform:translate(-30px, -30px) rotate(360deg) ;}/*注意translate和rotate的先后顺序*/
+}
+.left,.right{
+	width: 30px;
+	height: 60px;
+	box-sizing: border-box;
+	overflow: hidden;
+	position: relative;
+}
+.left{
+	float: left;
+}
+.right{
+	float: right;
+}
+.leftDong,.rigDong{
+	position: absolute;
+	width: 60px;
+	height: 60px;
+	border: 10px solid #0f0; 
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	border-radius: 50%;
+	top: 0;
+}
+.leftDong{
+	left: 0;
+	border-right: 10px solid transparent;
+	border-top: 10px solid transparent;
+	transform: rotate(45deg);
+	animation: mymoveL 1s linear infinite;
+}
+@keyframes mymoveL{
+	0%{transform: rotate(45deg);}
+	25%,50%{transform: rotate(225deg);}
+	75%,100%{transform: rotate(405deg);}
+	/*100%{transform: rotate(225deg);}*/
+}
+.rigDong{
+	border-left: 10px solid transparent;
+	border-bottom: 10px solid transparent;
+	transform: rotate(45deg);
+	right: 0;
+	animation: mymoveR 3s linear infinite;
+}
+@keyframes mymoveR{
+	0%,25%{transform: rotate(45deg);}
+	50%,75%{transform: rotate(225deg);}
+	100%{transform: rotate(405deg);}
+}

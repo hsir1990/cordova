@@ -1,0 +1,28 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "com.dongxiaohai.hello"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.dongxiaohai.hello"
+        },
+        "cordova-sqlite-storage": {
+            "PACKAGE_NAME": "com.dongxiaohai.hello"
+        },
+        "cordova-plugin-camera": {
+            "PACKAGE_NAME": "com.dongxiaohai.hello"
+        }
+    },
+    "dependent_plugins": {
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "com.dongxiaohai.hello"
+        }
+    }
+}

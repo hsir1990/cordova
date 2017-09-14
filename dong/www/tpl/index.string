@@ -1,0 +1,6 @@
+<session id="index">
+    <h1 id = "cameraTakePicture">给孩子拍照</h1>
+	<img id = "myImage" />
+	<h2 id="camerePage">看孩子相册</h2>
+</session>  
+
