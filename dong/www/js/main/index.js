@@ -156,7 +156,7 @@ window.addEventListener('load', function(){
         }   
         // $('#index').on('click', function(){
         //         $.ajax({
-        //           url: 'http://192.168.1.103:3000/aa',
+        //           url: 'http://10.9.0.148:3000/aa',
         //           type: 'GET',
         //           // contentType:"application/json",
         //           // dataType:"json",
@@ -173,37 +173,75 @@ window.addEventListener('load', function(){
         document.getElementById("cameraTakePicture").addEventListener("click", cameraTakePicture);
 
         function cameraTakePicture() {
-           navigator.camera.getPicture(onSuccess, onFail, { 
-              quality: 50,
-              destinationType: Camera.DestinationType.DATA_URL
+            navigator.camera.getPicture(onSuccess, onFail, { 
+                quality: 50,                                            // 相片质量是50  
+                sourceType: Camera.PictureSourceType.Camera,            // 设置从摄像头拍照获取  
+                // destinationType: Camera.DestinationType.DATA_URL
+                destinationType: Camera.DestinationType.FILE_URI
            });
 
            function onSuccess(imageData) {
-                var image = document.getElementById('myImage');
-                image.src = "data:image/jpeg;base64," + imageData;
+                // var smallImage = document.getElementById('myImage');
+                // smallImage.src = "data:image/jpeg;base64,"+imageData;
+                
+                // // $.post("http://10.9.0.148:3000/pai",{im:imageData},function(data){
+                // //     console.log(data);
+                // // })
+                // $.ajax({
+                //     url: 'http://10.9.0.148:3000/pai',
+                //     type: 'POST',
+                //     // contentType:"application/json",
+                //     // dataType:"json",
+                //     // timeout:20000,
+                //     data: { "img": imageData},
+                //     success: function(result) {
+                //         // Do something with the result
+                //         console.log(result)
+                //     }   
+                // })                
 
-                // $.post("http://192.168.1.103:3000/pai",{im:imageData},function(data){
-                //     console.log(data);
-                // })
-                $.ajax({
-                  url: 'http://192.168.1.103:3000/pai',
-                  type: 'POST',
-                  // contentType:"application/json",
-                  // dataType:"json",
-                  // timeout:20000,
-                  data: { "img": imageData},
-                  success: function(result) {
-                      // Do something with the result
-                      console.log(result)
-                    }   
-                })                
 
 
-           }
+                // 安卓
+                var smallImage = document.getElementById('myImage');
+                smallImage.src = imageData;
+                convertImgToBase64(imageData, function(base64Img) {  
+                    var imageDataa = base64Img.replace("data:image/png;base64,","");
+                    $.ajax({
+                            url: 'http://10.9.0.148:3000/pai',
+                            type: 'POST',
+                            // contentType:"application/json",
+                            // dataType:"json",
+                            // timeout:20000,
+                            data: { "img": imageDataa},
+                            success: function(result) {
+                                // Do something with the result
+                                console.log(result)
+                            }   
+                        })    
+                 });
+                // 把图片转成base64  
+                function convertImgToBase64(url, callback, outputFormat){  
+                    var canvas = document.createElement('CANVAS'),  
+                    ctx = canvas.getContext('2d'),  
+                    img = new Image;  
+                    img.crossOrigin = 'Anonymous';  
+                    img.onload = function() {  
+                    canvas.height = img.height;  
+                    canvas.width = img.width;  
+                    ctx.drawImage(img, 0, 0);  
+                    var dataURL = canvas.toDataURL(outputFormat || 'image/png');  
+                    callback.call(this, dataURL);  
+                    canvas = null;  
+                    };  
+                    img.src = url;  
+                }  
+
+           };
 
            function onFail(message) {
               alert('没拍的原因: ' + message);
-           }
+           };
         }
 
 
